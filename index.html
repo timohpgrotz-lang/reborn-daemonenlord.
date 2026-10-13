@@ -198,7 +198,19 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 const root=document.querySelector('#game'),scene=new THREE.Scene();scene.background=new THREE.Color(0x1b253b);scene.fog=new THREE.Fog(0x9aabb5,34,105);
 const camera=new THREE.PerspectiveCamera(56,innerWidth/innerHeight,.1,140);
-const renderer=new THREE.WebGLRenderer({antialias:true});
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+} catch (error) {
+  const notice = document.getElementById('startupNotice');
+  if (notice) {
+    notice.style.display = 'block';
+    notice.textContent =
+      '3D-Renderer konnte nicht starten: ' +
+      (error?.message || String(error));
+  }
+  throw error;
+}
 const startupNotice=document.getElementById('startupNotice');if(startupNotice)startupNotice.style.display='none';renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;root.appendChild(renderer.domElement);
 scene.add(new THREE.HemisphereLight(0xdcecff,0x26372d,2.35));let sun=new THREE.DirectionalLight(0xffdfbd,3.25);sun.position.set(-10,17,8);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);scene.add(sun);
 const M=(c,r=.8,m=0)=>new THREE.MeshStandardMaterial({color:c,roughness:r,metalness:m});
