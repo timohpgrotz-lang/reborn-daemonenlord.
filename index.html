@@ -2,10 +2,10 @@
 <html lang="de">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>Reborn: Dämonenlord – Version 1.5</title>
+<title>Reborn: Dämonenlord – Version 1.8</title>
 <style>
 :root{--gold:#e9c477;--panel:#10131de8;--line:#716084;--text:#f7f1ff;--muted:#c2b9d0;--purple:#9d63e8;--blue:#66c7ff;--red:#e75b70}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;height:100dvh;overflow:hidden;background:#0b1018;color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif;touch-action:none}#game{position:fixed;inset:0}canvas{width:100%;height:100%;display:block}
+*{box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}input,textarea{user-select:text;-webkit-user-select:text}button,.btn,[role="button"]{ -webkit-user-select:none;user-select:none;-webkit-touch-callout:none}html,body{margin:0;width:100%;height:100%;height:100dvh;overflow:hidden;background:#0b1018;color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif;touch-action:none}#game{position:fixed;inset:0}canvas{width:100%;height:100%;display:block}
 .hud{position:fixed;inset:0;pointer-events:none}.panel{background:var(--panel);border:1px solid #77658c88;backdrop-filter:blur(8px);border-radius:13px;box-shadow:0 10px 28px #0005}.top{position:absolute;top:10px;left:10px;right:10px;display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.stats{padding:10px 12px;width:min(330px,58vw)}.brand{font-size:12px;letter-spacing:.12em;color:var(--gold);font-weight:900}.row{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;margin-top:5px}.bar{height:7px;border-radius:8px;background:#383142;overflow:hidden;margin-top:4px}.bar span{display:block;height:100%;width:100%;transition:width .15s}.hp{background:linear-gradient(90deg,#a82546,#ff7d83)}.mp{background:linear-gradient(90deg,#2879dc,#77d5ff)}.xp{background:linear-gradient(90deg,#813ee4,#d6a5ff)}.topbuttons{display:flex;gap:6px;pointer-events:auto}.topbuttons button,.btn{border:1px solid #76618b;background:#171724eF;color:white;border-radius:10px;padding:9px 11px;font-weight:750}.topbuttons button{font-size:11px}.quest{position:absolute;left:10px;top:139px;padding:10px 12px;width:min(260px,48vw)}.quest b{color:var(--gold);font-size:11px;letter-spacing:.06em}.quest p{margin:4px 0;font-size:12px}.hint{position:absolute;right:10px;top:139px;text-align:right;color:#e1d9e9;font-size:10px;line-height:1.5;max-width:210px}.bottom{position:absolute;left:12px;right:12px;bottom:12px;display:flex;justify-content:space-between;align-items:end;gap:8px}.dpad{pointer-events:auto;display:grid;grid-template-columns:42px 42px 42px;grid-template-rows:42px 42px 42px;gap:3px}.dpad button,.skill{touch-action:none;border:1px solid #9c8bb1aa;background:#181724e8;color:white;border-radius:12px;font-weight:900}.dpad button{font-size:18px}.dpad .empty{visibility:hidden}.skills{pointer-events:auto;display:flex;align-items:end;gap:5px}.skill{width:51px;height:55px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:9px}.skill strong{font-size:18px}.skill.special{border-color:#d9b56c;background:#332718ed}.skill.magic{border-color:#6ac7ff;background:#142a40ed}.skill.ult{border-color:#b68bff;background:#2a1944ed}.cool{opacity:.5;filter:grayscale(.7)}.desktop{position:absolute;bottom:105px;right:12px;color:#e3dbea;font-size:10px;text-align:right;line-height:1.6}.toast{position:absolute;top:42%;left:50%;transform:translate(-50%,-50%);font-weight:900;color:#ffe4a0;text-shadow:0 2px 12px #000;text-align:center;max-width:85vw;opacity:0;transition:opacity .2s}.toast.show{opacity:1}.modalwrap{position:fixed;inset:0;background:#05060bdc;display:none;align-items:center;justify-content:center;padding:15px;z-index:10;pointer-events:auto}.modalwrap.show{display:flex}.modal{width:min(680px,100%);max-height:90vh;overflow:auto;padding:18px;background:#14131f;border:1px solid #6b577d;border-radius:17px}.modal h2{margin:0 0 8px;color:var(--gold)}.modal p{font-size:13px;color:#d4ccdf;line-height:1.5}.close{float:right;border:0;background:#3b2c49;color:#fff;padding:8px 10px;border-radius:9px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.option{padding:12px;border:1px solid #51445e;border-radius:12px;background:#1b1a28;color:#fff;text-align:left}.option b{display:block;color:var(--gold);margin-bottom:5px}.option small{color:#c9bfd6;line-height:1.45}.option.active{border-color:var(--gold);background:#30253b}.note{font-size:11px;color:#bfb5cb;line-height:1.5;margin-top:12px}
 .comboHud{position:absolute;left:50%;top:18%;transform:translateX(-50%);font-weight:1000;font-size:clamp(17px,3vw,28px);letter-spacing:.12em;color:#ffe1a0;text-shadow:0 0 16px #d978ff,0 3px 8px #000;opacity:0;transition:opacity .12s;text-align:center;white-space:nowrap}
 .comboHud.show{opacity:1}.bossbar{position:absolute;top:29%;left:50%;transform:translateX(-50%);width:min(360px,70vw);display:none;text-align:center}.bossbar.show{display:block}.bossbar b{font-size:11px;letter-spacing:.12em;color:#ffc9dc;text-shadow:0 2px 5px #000}.bossbar .bar{height:9px;border:1px solid #e2a8c8;background:#291522}.bossbar .bar span{background:linear-gradient(90deg,#7c174d,#f45a89)}
@@ -31,6 +31,12 @@
 .creator-attribute-controls button:disabled{opacity:.3}
 .creator-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;flex-wrap:wrap}.creator .start{background:linear-gradient(100deg,#9860db,#d6a452);color:#120d1c;font-weight:900;border:0;border-radius:10px;padding:13px 18px}.creator .smallnote{font-size:11px;color:#b8a9ca;line-height:1.45}
 @media(max-width:560px){.creator-grid{grid-template-columns:1fr}.creator-card{padding:14px;width:100%;max-height:96vh;max-height:96dvh}.creator-section{padding:10px}.creator-footer{position:sticky;bottom:-14px;padding:10px 0 calc(10px + env(safe-area-inset-bottom));background:#10101af5;z-index:2}.creator .start{width:100%;min-height:50px;font-size:15px}.attr button{position:relative;z-index:5;display:inline-flex;align-items:center;justify-content:center;min-width:46px;min-height:44px;font-size:24px;touch-action:manipulation;-webkit-tap-highlight-color:transparent;cursor:pointer;pointer-events:auto}.creator-attribute-row{grid-template-columns:minmax(0,1fr) 38px 96px;gap:7px;padding:9px;min-height:62px}.creator-attribute-name{font-size:14px}.creator-attribute-desc{font-size:10px}.creator-attribute-value{height:36px;min-width:34px;font-size:17px}.creator-attribute-controls{gap:6px}.creator-attribute-controls button{width:44px;height:44px;font-size:24px}.creator input,.creator select{font-size:16px;min-height:40px}}
+
+@media (orientation:landscape) and (max-height:600px){
+  .top{top:5px;left:6px;right:6px;gap:5px}
+  .panel{border-radius:10px}
+  .stats{padding:6px 8px}
+}
 </style></head>
 <body><div id="game"></div>
 <div class="creator" id="creator">
@@ -55,7 +61,7 @@
  </div>
 </div>
 <div class="hud">
- <div class="top"><div class="panel stats"><div class="brand">REBORN: DÄMONENLORD <span style="color:white">· V 1.5</span></div><div class="row"><span id="level">Stufe 1 · Erwacht</span><span id="hptext">100/100 LP</span></div><div class="bar"><span class="hp" id="hpbar"></span></div><div class="row"><span id="mptext">100/100 Mana</span><span id="souls">0 Seelen</span></div><div class="bar"><span class="mp" id="mpbar"></span></div><div class="bar"><span class="xp" id="xpbar" style="width:0%"></span></div></div><div class="topbuttons"><button id="weaponBtn">⚔ Waffen</button><button id="skillBtn">✦ Talente</button><button id="mapBtn">⌖ Welt</button><button id="kingdomBtn">🏰 Reich</button><button id="sectBtn">☯ Sekten</button><button id="summonBtn">✧ Beschwörung</button><button id="gearBtn">♜ Ausrüstung</button><button id="attributeBtn">✦ Attribute</button></div></div>
+ <div class="top"><div class="panel stats"><div class="brand">REBORN: DÄMONENLORD <span style="color:white">· V 1.8</span></div><div class="row"><span id="level">Stufe 1 · Erwacht</span><span id="hptext">100/100 LP</span></div><div class="bar"><span class="hp" id="hpbar"></span></div><div class="row"><span id="mptext">100/100 Mana</span><span id="souls">0 Seelen</span></div><div class="bar"><span class="mp" id="mpbar"></span></div><div class="bar"><span class="xp" id="xpbar" style="width:0%"></span></div></div><div class="topbuttons"><button id="weaponBtn">⚔ Waffen</button><button id="skillBtn">✦ Talente</button><button id="mapBtn">⌖ Welt</button><button id="kingdomBtn">🏰 Reich</button><button id="sectBtn">☯ Sekten</button><button id="summonBtn">✧ Beschwörung</button><button id="gearBtn">♜ Ausrüstung</button><button id="attributeBtn">✦ Attribute</button></div></div>
  <div class="panel quest"><b>AKTUELLES ZIEL</b><p id="quest">Besiege 3 Schleime im alten Hain.</p><p class="row" style="color:#c8bdd4"><span id="enemyCount">Gegner: 0</span><span id="area">Alter Hain</span></p></div>
  <div class="hint">Erkunde die Lichtung und die Ruinen.<br><b style="color:#e9c477">Achte auf gegnerische Angriffe.</b><br>WASD oder Touch-Steuerung</div>
  <button class="interaction" id="interact">✦ Mit dem Schrein interagieren</button><button class="interaction" id="openChestBtn" style="bottom:76px;display:none">▣ Schatzkiste öffnen</button>
@@ -145,7 +151,7 @@ import * as THREE from 'https://esm.sh/three@0.161.0';
 import { GLTFLoader } from 'https://esm.sh/three@0.161.0/examples/jsm/loaders/GLTFLoader.js';
 const root=document.querySelector('#game'),scene=new THREE.Scene();scene.background=new THREE.Color(0x30294f);scene.fog=new THREE.Fog(0x8da9b7,24,78);
 const camera=new THREE.PerspectiveCamera(56,innerWidth/innerHeight,.1,140);
-const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.65));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;root.appendChild(renderer.domElement);
+const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;root.appendChild(renderer.domElement);
 scene.add(new THREE.HemisphereLight(0xe0eaff,0x342b3d,2));let sun=new THREE.DirectionalLight(0xc6b5ff,3.1);sun.position.set(-10,17,8);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);scene.add(sun);
 const M=(c,r=.8,m=0)=>new THREE.MeshStandardMaterial({color:c,roughness:r,metalness:m});
 const mats={grass:M(0x47714d),path:M(0x9b866a),bark:M(0x49322b),leaf:M(0x275744),leaf2:M(0x3d7955),stone:M(0x66717e),gold:M(0xe7be66,.35,.5),armor:M(0x28263a,.45,.2),cape:M(0x922b48,.5,.15),skin:M(0x946574),steel:M(0xc4d0e0,.25,.75),fire:M(0xff6b29,.35),ice:M(0x69d6ff,.3,.25),slime:M(0x65b77d,.45),eye:M(0x1b2530),purple:M(0x9b60d9,.4,.3),obsidian:M(0x171627,.25,.65),silver:M(0xdce6f6,.2,.8),ruby:M(0xf33e74,.25,.55),teal:M(0x40e2d2,.25,.55),leather:M(0x39253b,.8,.1),glow:new THREE.MeshBasicMaterial({color:0xa86bff}),goldGlow:new THREE.MeshBasicMaterial({color:0xffd77d})};
@@ -189,6 +195,8 @@ for(let i=0;i<75;i++){
 }
 
 const player=new THREE.Group();scene.add(player);player.position.set(0,0,4);
+// Reusable procedural humanoid rig: articulated shoulder/hip pivots, driven by the animation loop.
+const rigArms=[],rigLegs=[];let rigWalkPhase=0;
 // Hybrid anime-realistic demon lord: sculpted silhouette, layered armor, face, hair and articulated limbs.
 const charMat={
  skin:new THREE.MeshStandardMaterial({color:0xf0c6b4,roughness:.62}),
@@ -213,14 +221,14 @@ for(let s of [-1,1]){
  box(player,s*.22,.78,.08,.21,.22,.25,armorPlate);
  box(player,s*.22,.66,.10,.22,.045,.26,goldPlate);
  // articulated legs, armored thighs and greaves
- const leg=new THREE.Group();leg.position.set(s*.145,.72,0);player.add(leg);
+ const leg=new THREE.Group();leg.position.set(s*.145,.72,0);player.add(leg);rigLegs.push({group:leg,side:s});
  capsule(leg,.105,.30,charMat.cloth,[0,-.17,0]);
  let thigh=mesh(leg,new THREE.SphereGeometry(1,12,10),armorPlate,[0,-.14,.015]);thigh.scale.set(.14,.20,.15);
  box(leg,0,-.35,.065,.18,.20,.19,armorPlate);
  box(leg,0,-.36,.16,.19,.045,.045,goldPlate);
  box(leg,0,-.48,.10,.22,.09,.31,charMat.black);
  // articulated arms with oversized fantasy pauldrons
- const arm=new THREE.Group();arm.position.set(s*.38,1.40,0);player.add(arm);
+ const arm=new THREE.Group();arm.position.set(s*.38,1.40,0);player.add(arm);rigArms.push({group:arm,side:s});
  capsule(arm,.095,.23,charMat.skin,[0,-.15,.005]);
  let sleeve=mesh(arm,new THREE.SphereGeometry(1,12,10),armorPlate,[0,-.13,0]);sleeve.scale.set(.135,.19,.14);
  const pauldron=mesh(arm,new THREE.SphereGeometry(1,14,10),armorPlate,[s*.035,.015,0]);pauldron.scale.set(.20,.14,.19);
@@ -332,7 +340,13 @@ const itemCatalog=[
  {name:'Greifenstiefel',slot:'boots',rarity:'Episch',color:'#ffbd5e',agility:5,vitality:2,desc:'+5 Geschick · +2 Vitalität',model:'gold',set:'Wächter'},
  {name:'Seelenkristall',slot:'amulet',rarity:'Selten',color:'#b58aff',damage:3,defense:2,intelligence:2,desc:'+3 Schaden · +2 Verteidigung · +2 Intelligenz',model:'crystal',set:'Runenfürst'},
  {name:'Herz des Drachen',slot:'amulet',rarity:'Episch',color:'#ffbd5e',damage:6,vitality:4,desc:'+6 Schaden · +4 Vitalität',model:'dragon',set:'Drachenherz'},
- {name:'Amulett des Mondes',slot:'amulet',rarity:'Selten',color:'#b58aff',intelligence:4,agility:2,desc:'+4 Intelligenz · +2 Geschick',model:'moon',set:'Mondfinsternis'}
+ {name:'Amulett des Mondes',slot:'amulet',rarity:'Selten',color:'#b58aff',intelligence:4,agility:2,desc:'+4 Intelligenz · +2 Geschick',model:'moon',set:'Mondfinsternis'},
+ {name:'Himmelsbrecher – Türkisklinge',slot:'weapon',rarity:'Legendär',color:'#45f2e4',damage:18,agility:3,desc:'+18 Schaden · +3 Geschick · Heilige Türkisenergie',model:'skybreaker',set:'Himmelsbrecher'},
+ {name:'Obsidian-Katastrophe',slot:'weapon',rarity:'Legendär',color:'#e7bd72',damage:24,strength:4,desc:'+24 Schaden · +4 Stärke · Schwarze Runen',model:'obsidian',set:'Katastrophe'},
+ {name:'Elfenbein-Mondschneide',slot:'weapon',rarity:'Episch',color:'#d7d8e8',damage:16,intelligence:4,desc:'+16 Schaden · +4 Intelligenz · Mondsichel-Klinge',model:'moonblade',set:'Mondfinsternis'},
+ {name:'Azur-Himmelslanze',slot:'weapon',rarity:'Episch',color:'#62baff',damage:17,agility:3,desc:'+17 Schaden · +3 Geschick · Reichweite der Himmelsstürmer',model:'azurespear',set:'Himmelssturm'},
+ {name:'Panzer des Schwarzen Drachen',slot:'armor',rarity:'Legendär',color:'#39d8ff',defense:20,vitality:8,strength:4,desc:'+20 Verteidigung · +8 Vitalität · +4 Stärke',model:'dragonlord',set:'Schwarzer Drache'},
+ {name:'Drachenschädel-Krone',slot:'helmet',rarity:'Legendär',color:'#39d8ff',defense:7,damage:6,intelligence:3,desc:'+7 Verteidigung · +6 Schaden · +3 Intelligenz',model:'dragonlord',set:'Schwarzer Drache'}
 ];
 
 // Equipment meshes are real scene objects attached to the player, so appearance changes when gear is equipped.
@@ -353,6 +367,16 @@ function applyEquipmentVisuals(){
   for(let s of [-1,1]){addGearMesh(new THREE.SphereGeometry(1,12,10),m,[s*.40,1.40,0],[.24,.16,.22]);addGearMesh(new THREE.TorusGeometry(.16,.025,6,16),gold,[s*.4,1.41,.12],[1,.8,1],[Math.PI/2,0,0]);}
   if(eq.armor.model==='frost')for(let s of [-1,1])addGearMesh(new THREE.ConeGeometry(.12,.42,6),metal(0x8eeaff,.5),[s*.42,1.55,0],[1,1,1],[0,0,-s*.65]);
   if(eq.armor.model==='moon')addGearMesh(new THREE.ConeGeometry(.5,.95,4),metal(0x301641),[0,.83,-.27],[1,1,1],[Math.PI,0,0]);
+  if(eq.armor.model==='dragonlord'){
+   const obs=metal(0x101321,.35),cyan=metal(0x19d9ff,.7);
+   for(let s of [-1,1]){
+    addGearMesh(new THREE.ConeGeometry(.16,.68,6),obs,[s*.48,1.57,-.02],[1,1,1],[0,0,-s*.85]);
+    addGearMesh(new THREE.ConeGeometry(.12,.52,6),gold,[s*.33,1.42,.12],[1,1,1],[0,0,-s*.55]);
+    addGearMesh(new THREE.OctahedronGeometry(.09),cyan,[s*.22,1.32,.28]);
+   }
+   addGearMesh(new THREE.OctahedronGeometry(.16),cyan,[0,1.25,.31]);
+   addGearMesh(new THREE.ConeGeometry(.22,.5,6),obs,[0,1.68,-.18],[1,1,1],[Math.PI,0,0]);
+  }
  }
  if(eq.helmet){
   const c=eq.helmet.model==='abyss'?0x24132f:eq.helmet.model==='rune'?0x344267:0x2a293d;
@@ -360,17 +384,38 @@ function applyEquipmentVisuals(){
   addGearMesh(new THREE.SphereGeometry(1,16,12),m,[0,1.86,.01],[.235,.20,.215]);
   for(let s of [-1,1]){addGearMesh(new THREE.ConeGeometry(.07,.36,6),eq.helmet.model==='abyss'?gold:m,[s*.16,2.02,0],[1,1,1],[0,0,-s*.55]);}
   addGearMesh(new THREE.OctahedronGeometry(.065),gold,[0,1.88,.22]);
+  if(eq.helmet.model==='dragonlord'){
+   const dark=metal(0x0a0b17,.3),glow=metal(0x18dfff,.7);
+   for(let s of [-1,1]){
+    addGearMesh(new THREE.ConeGeometry(.075,.52,6),dark,[s*.17,2.13,-.01],[1,1,1],[0,0,-s*.48]);
+    addGearMesh(new THREE.ConeGeometry(.045,.32,5),glow,[s*.13,1.91,.17]);
+   }
+   addGearMesh(new THREE.OctahedronGeometry(.07),glow,[0,1.96,.21]);
+  }
  }
  if(eq.gloves){const m=metal(eq.gloves.model==='rune'?0x4b3774:0x34394c,.12);for(let s of [-1,1]){addGearMesh(new THREE.CylinderGeometry(.075,.10,.23,8),m,[s*.40,1.08,.04],[1,1,1],[0,0,s*.12]);addGearMesh(new THREE.BoxGeometry(.12,.16,.05),gold,[s*.40,1.08,.13]);}}
  if(eq.boots){const m=metal(eq.boots.model==='wind'?0x36465d:0x55452d,.1);for(let s of [-1,1]){addGearMesh(new THREE.BoxGeometry(.24,.15,.34),m,[s*.15,.12,.08]);addGearMesh(new THREE.BoxGeometry(.23,.035,.34),gold,[s*.15,.17,.08]);}}
  if(eq.amulet){const color=eq.amulet.model==='dragon'?0xff8438:eq.amulet.model==='moon'?0x8b71ff:0x64eaff;const m=metal(color,.65);addGearMesh(new THREE.OctahedronGeometry(.105),m,[0,1.22,.31]);}
  // equipped loot weapon: a distinct floating weapon model held alongside the base weapon, colored by loot identity
  if(eq.weapon){
-  const m=metal(eq.weapon.model==='ice'?0x8eeaff:eq.weapon.model==='dusk'?0xffbd5e:eq.weapon.model==='rune'?0xb58aff:0x63d8ff,.35);
+  const model=eq.weapon.model;
+  const palette={skybreaker:[0x19dfe5,0xffd36c],obsidian:[0x161622,0xe5bd68],moonblade:[0xe8e4d7,0xb9a9d8],azurespear:[0x1554b5,0xffd36c]};
+  const colors=palette[model]||[model==='ice'?0x8eeaff:model==='dusk'?0xffbd5e:model==='rune'?0xb58aff:0x63d8ff,0xffca66];
+  const m=metal(colors[0],.32),accent=metal(colors[1],.24);
   const w=new THREE.Group();w.position.set(.42,1.12,0);player.add(w);equipmentVisuals.push(w);
-  addGearMesh(new THREE.BoxGeometry(.14,1.55,.10),m,[.42,1.12,0]); // overlay blade is intentionally visible against current weapon
-  addGearMesh(new THREE.BoxGeometry(.46,.09,.16),gold,[.42,.53,0]);
-  addGearMesh(new THREE.OctahedronGeometry(.12),m,[.42,1.78,.03]);
+  if(model==='azurespear'){
+   addGearMesh(new THREE.CylinderGeometry(.035,.055,1.9,8),m,[.42,1.15,0]);
+   addGearMesh(new THREE.ConeGeometry(.14,.48,6),accent,[.42,2.22,0]);
+   addGearMesh(new THREE.ConeGeometry(.12,.36,6),accent,[.42,.10,0],[1,1,1],[Math.PI,0,0]);
+   addGearMesh(new THREE.OctahedronGeometry(.13),m,[.42,1.92,.05]);
+  }else{
+   addGearMesh(new THREE.BoxGeometry(model==='obsidian'?.22:.14,1.55,model==='obsidian'?.15:.10),m,[.42,1.12,0]);
+   addGearMesh(new THREE.BoxGeometry(model==='skybreaker'?.72:.46,.10,.17),accent,[.42,.53,0]);
+   addGearMesh(new THREE.OctahedronGeometry(model==='obsidian'?.18:.12),model==='skybreaker'?accent:m,[.42,1.78,.03]);
+   if(model==='skybreaker'){for(let s of [-1,1])addGearMesh(new THREE.ConeGeometry(.08,.35,5),accent,[.42+s*.22,1.70,.01],[1,1,1],[0,0,-s*.7]);}
+   if(model==='obsidian'){for(let s of [-1,1])addGearMesh(new THREE.ConeGeometry(.12,.45,5),accent,[.42+s*.25,.58,0],[1,1,1],[0,0,s*Math.PI/2]);}
+   if(model==='moonblade'){addGearMesh(new THREE.TorusGeometry(.18,.045,6,16),accent,[.42,1.76,.02],[1,1,1],[Math.PI/2,0,0]);}
+  }
  }
  // full-set bonuses: three or more equipped items with same set
  const counts={};items.forEach(i=>{if(i.set)counts[i.set]=(counts[i.set]||0)+1});
@@ -473,7 +518,7 @@ document.querySelector('#startGame').onclick=()=>{
  state.maxHp=100+(attributes.vitality-5)*12+(attributes.endurance-5)*8;state.hp=state.maxHp;
  state.maxMp=100+(attributes.intelligence-5)*10;state.mp=state.maxMp;
  state.baseDamage=1+(attributes.strength-5)*.08;state.moveSpeed=5+(attributes.agility-5)*.18;state.defenseBase=(attributes.endurance-5)*2;
- document.querySelector('.brand').innerHTML='REBORN: DÄMONENLORD <span style="color:white">· V 1.5 · '+heroName.replace(/[<>]/g,'')+'</span>';
+ document.querySelector('.brand').innerHTML='REBORN: DÄMONENLORD <span style="color:white">· V 1.8 · '+heroName.replace(/[<>]/g,'')+'</span>';
  document.querySelector('#creator').classList.add('hidden');toast('Die Wiedergeburt beginnt, '+heroName+'!');
 };
 
@@ -573,8 +618,11 @@ function renderWeapons(){document.querySelector('#weaponOptions').innerHTML=Obje
 function renderSkills(){document.querySelector('#skillOptions').innerHTML=`<button class="option" id="fireUp"><b>♨ Flammenkern · Stufe ${state.fireLevel}</b><small>Feuerball-Schaden +35%. Kosten: 1 Talentpunkt (Demo kostenlos).</small></button><button class="option" id="iceUp"><b>❄ Frostgriff · Stufe ${state.iceLevel}</b><small>Eisstoß-Schaden +35%. Kosten: 1 Talentpunkt (Demo kostenlos).</small></button><button class="option ${state.ultUnlocked?'active':''}" id="ultInfo"><b>✹ Dämonenpuls</b><small>${state.ultUnlocked?'Freigeschaltet · Flächenschaden':'Freischaltung ab Stufe 3'}.</small></button>`;document.querySelector('#fireUp').onclick=()=>{state.fireLevel++;toast('Flammenkern verbessert')};document.querySelector('#iceUp').onclick=()=>{state.iceLevel++;toast('Frostgriff verbessert')};document.querySelector('#ultInfo').onclick=()=>toast(state.ultUnlocked?'Dämonenpuls bereit':'Erreiche Stufe 3')}
 document.querySelectorAll('[data-move]').forEach(b=>{const map={forward:'KeyW',back:'KeyS',left:'KeyA',right:'KeyD'},k=map[b.dataset.move],on=e=>{e.preventDefault();state.keys[k]=true},off=e=>{e.preventDefault();state.keys[k]=false};b.addEventListener('pointerdown',on);['pointerup','pointerleave','pointercancel'].forEach(n=>b.addEventListener(n,off))});
 addEventListener('keydown',e=>{state.keys[e.code]=true;if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))e.preventDefault();if(e.repeat)return;if(e.code==='Space')attack();if(e.code==='KeyQ')cast('fire');if(e.code==='KeyE')cast('ice');if(e.code==='KeyR')ultimate();if(e.code==='KeyT')summonSelected();if(e.code==='KeyF'){let c=chests.filter(x=>!x.opened).sort((a,b)=>a.g.position.distanceTo(player.position)-b.g.position.distanceTo(player.position))[0];if(c&&c.g.position.distanceTo(player.position)<2.7)openChest(c);else toast('Keine Schatzkiste in Reichweite')}if(e.code==='ShiftLeft'||e.code==='ShiftRight')dodge()});addEventListener('keyup',e=>state.keys[e.code]=false);addEventListener('blur',()=>state.keys={});
-let last=performance.now(),ui=0;function animate(now){requestAnimationFrame(animate);let dt=Math.min((now-last)/1000,.04);last=now;if(characterMixer)characterMixer.update(dt);for(let k of ['attackCd','fireCd','iceCd','ultCd','dodgeCd','summonCd'])state[k]=Math.max(0,state[k]-dt);state.mp=Math.min(state.maxMp,state.mp+7*dt);state.toast-=dt;if(state.toast<=0)document.querySelector('#toast').classList.remove('show');
-let move=new THREE.Vector3();if(state.keys.KeyW||state.keys.ArrowUp)move.z-=1;if(state.keys.KeyS||state.keys.ArrowDown)move.z+=1;if(state.keys.KeyA||state.keys.ArrowLeft)move.x-=1;if(state.keys.KeyD||state.keys.ArrowRight)move.x+=1;if(move.lengthSq()){move.normalize();state.lastDir.copy(move);player.position.addScaledVector(move,(state.moveSpeed||5)*dt);player.rotation.y=Math.atan2(move.x,move.z);weaponPivot.rotation.z=THREE.MathUtils.lerp(weaponPivot.rotation.z,0,dt*8)}else weaponPivot.rotation.z=THREE.MathUtils.lerp(weaponPivot.rotation.z,0,dt*6);
+let last=performance.now(),ui=0;function animate(now){requestAnimationFrame(animate);let dt=Math.min((now-last)/1000,.04);last=now;if(characterMixer)characterMixer.update(dt);player.position.y=Math.sin(now*.002)*.018;for(let k of ['attackCd','fireCd','iceCd','ultCd','dodgeCd','summonCd'])state[k]=Math.max(0,state[k]-dt);state.mp=Math.min(state.maxMp,state.mp+7*dt);state.toast-=dt;if(state.toast<=0)document.querySelector('#toast').classList.remove('show');
+let move=new THREE.Vector3();if(state.keys.KeyW||state.keys.ArrowUp)move.z-=1;if(state.keys.KeyS||state.keys.ArrowDown)move.z+=1;if(state.keys.KeyA||state.keys.ArrowLeft)move.x-=1;if(state.keys.KeyD||state.keys.ArrowRight)move.x+=1;const moving=move.lengthSq()>0;
+if(moving){rigWalkPhase+=dt*10;for(const limb of rigLegs)limb.group.rotation.x=Math.sin(rigWalkPhase)*.42*limb.side;for(const limb of rigArms)limb.group.rotation.x=-Math.sin(rigWalkPhase)*.28*limb.side;}
+else{for(const limb of rigLegs)limb.group.rotation.x+=(0-limb.group.rotation.x)*Math.min(1,dt*9);for(const limb of rigArms)limb.group.rotation.x+=(0-limb.group.rotation.x)*Math.min(1,dt*9);}
+if(move.lengthSq()){move.normalize();state.lastDir.copy(move);player.position.addScaledVector(move,(state.moveSpeed||5)*dt);player.rotation.y=Math.atan2(move.x,move.z);weaponPivot.rotation.z=THREE.MathUtils.lerp(weaponPivot.rotation.z,0,dt*8)}else weaponPivot.rotation.z=THREE.MathUtils.lerp(weaponPivot.rotation.z,0,dt*6);
 // subtle breathing/idle motion keeps the character from feeling like a statue
 if(window.__demonArm){window.__demonArm.rotation.x=Math.sin(now*.004)*.035;window.__demonArm.rotation.z=Math.sin(now*.003)*.025;}
 player.position.x=THREE.MathUtils.clamp(player.position.x,-25,25);player.position.z=THREE.MathUtils.clamp(player.position.z,-38,17);
