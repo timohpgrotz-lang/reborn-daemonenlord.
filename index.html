@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>Reborn: Dämonenlord</title>
+<title>Reborn: Dämonenlord – Version 1.3</title>
 <style>
 :root{--gold:#e9c477;--panel:#10131de8;--line:#716084;--text:#f7f1ff;--muted:#c2b9d0;--purple:#9d63e8;--blue:#66c7ff;--red:#e75b70}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;height:100dvh;overflow:hidden;background:#0b1018;color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif;touch-action:none}#game{position:fixed;inset:0}canvas{width:100%;height:100%;display:block}
@@ -31,7 +31,7 @@
 .creator-attribute-controls button:disabled{opacity:.3}
 .creator-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;flex-wrap:wrap}.creator .start{background:linear-gradient(100deg,#9860db,#d6a452);color:#120d1c;font-weight:900;border:0;border-radius:10px;padding:13px 18px}.creator .smallnote{font-size:11px;color:#b8a9ca;line-height:1.45}
 @media(max-width:560px){.creator-grid{grid-template-columns:1fr}.creator-card{padding:14px;width:100%;max-height:96vh;max-height:96dvh}.creator-section{padding:10px}.creator-footer{position:sticky;bottom:-14px;padding:10px 0 calc(10px + env(safe-area-inset-bottom));background:#10101af5;z-index:2}.creator .start{width:100%;min-height:50px;font-size:15px}.attr button{position:relative;z-index:5;display:inline-flex;align-items:center;justify-content:center;min-width:46px;min-height:44px;font-size:24px;touch-action:manipulation;-webkit-tap-highlight-color:transparent;cursor:pointer;pointer-events:auto}.creator-attribute-row{grid-template-columns:minmax(0,1fr) 38px 96px;gap:7px;padding:9px;min-height:62px}.creator-attribute-name{font-size:14px}.creator-attribute-desc{font-size:10px}.creator-attribute-value{height:36px;min-width:34px;font-size:17px}.creator-attribute-controls{gap:6px}.creator-attribute-controls button{width:44px;height:44px;font-size:24px}.creator input,.creator select{font-size:16px;min-height:40px}}
-</style><meta name="theme-color" content="#10131d"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/icon.svg" type="image/svg+xml"></head>
+</style></head>
 <body><div id="game"></div>
 <div class="creator" id="creator">
  <div class="creator-card">
@@ -71,8 +71,8 @@
 <div class="modalwrap" id="gearModal"><div class="modal"><button class="close" data-close="gearModal">Schließen ✕</button><h2>Beute & Ausrüstung</h2><p>Rüste Waffen, Brustpanzer, Helme, Handschuhe, Stiefel und Amulette aus. Attribute werden addiert; ab 3 Teilen eines Sets erhältst du +5 Schaden und +3 Verteidigung.</p><div class="grid" id="gearOptions"></div><p class="note" id="gearSummary"></p></div></div>
 <div class="modalwrap" id="lootModal"><div class="modal"><button class="close" data-close="lootModal">Schließen ✕</button><h2 id="lootTitle">Schatz gefunden!</h2><p id="lootMessage">Du hast Beute erhalten.</p><div class="grid" id="lootOptions"></div><button class="btn" id="lootTakeAll" style="margin-top:10px">Alle Gegenstände einsammeln</button></div></div>
 <script type="module">
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js';
-import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/loaders/GLTFLoader.js';
+import * as THREE from 'https://esm.sh/three@0.161.0';
+import { GLTFLoader } from 'https://esm.sh/three@0.161.0/examples/jsm/loaders/GLTFLoader.js';
 const root=document.querySelector('#game'),scene=new THREE.Scene();scene.background=new THREE.Color(0x30294f);scene.fog=new THREE.Fog(0x8da9b7,24,78);
 const camera=new THREE.PerspectiveCamera(56,innerWidth/innerHeight,.1,140);
 const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.65));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;root.appendChild(renderer.domElement);
@@ -555,4 +555,4 @@ for(const c of crystals){c.g.position.y=Math.sin(now*.0018+c.phase)*.09;c.ring.r
 for(const o of motes){o.m.position.y+=Math.sin(now*.001+o.phase)*dt*.12;o.m.position.x+=Math.cos(now*.0007+o.phase)*dt*.06}
 player.traverse(o=>{if(o.isMesh&&o.material===mats.glow){o.material.opacity=.7+.3*Math.sin(now*.006)}});const desired=new THREE.Vector3(player.position.x,player.position.y+5.8,player.position.z+8.6);camera.position.lerp(desired,.09);camera.lookAt(player.position.x,1.1,player.position.z-1.5);ring.rotation.z+=dt*.8;renderer.render(scene,camera);ui+=dt;if(ui>.18){hud();ui=0}}
 addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});hud();requestAnimationFrame(animate);
-</script><script>if("serviceWorker" in navigator && location.protocol.startsWith("http")){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}</script></body></html>
+</script></body></html>
