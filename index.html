@@ -912,13 +912,15 @@ document.querySelector('#modelFile').addEventListener('change',async ev=>{
  }catch(err){fallbackCharacterMeshes.forEach(o=>o.visible=true);toast('GLB konnte nicht geladen werden. Bitte eine gültige GLB-Datei verwenden.')}
 });
 
- // Neues Standardmodell aus dem Projekt laden. Die GLB-eigene Skelettstruktur und Animation bleiben erhalten.
+ // Standardmodell aus dem Projekt laden. Bei Fehler bleibt die bisherige Spielfigur aktiv.
  const defaultModelLoader=new GLTFLoader();
- defaultModelLoader.load('./grab3d-lowpoly-knight-1.glb',gltf=>{
+ defaultModelLoader.load('./demonlord_full_assembly_preview.glb',gltf=>{
    try{
      if(importedCharacter){player.remove(importedCharacter);importedCharacter=null;}
      fallbackCharacterMeshes.forEach(o=>o.visible=false);
      importedCharacter=gltf.scene;
+     // Modular prototype was generated Z-up; convert it to Three.js Y-up.
+     importedCharacter.rotation.x=-Math.PI/2;
      const initialBox=new THREE.Box3().setFromObject(importedCharacter);
      const initialSize=initialBox.getSize(new THREE.Vector3());
      if(initialSize.y>0) importedCharacter.scale.setScalar(1.95/initialSize.y);
@@ -926,19 +928,50 @@ document.querySelector('#modelFile').addEventListener('change',async ev=>{
      importedCharacter.position.y=-fittedBox.min.y;
      importedCharacter.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});
      player.add(importedCharacter);
-     if(characterMixer)characterMixer.stopAllAction();
-     characterMixer=new THREE.AnimationMixer(importedCharacter);
-     if(gltf.animations && gltf.animations.length){
-       characterMixer.clipAction(gltf.animations[0]).play();
-       toast('Neues 3D-Modell geladen · Animation aktiv');
-     } else {
-       toast('Neues 3D-Modell geladen · keine Animation gefunden');
+
+     // Runtime articulated rig: bone hierarchy plus rigid armor-piece binding.
+     // This is a rigid-part rig, not skinned vertex deformation.
+     const rigRoot=new THREE.Bone();rigRoot.name='Demonlord_Root';importedCharacter.add(rigRoot);
+     const pelvis=new THREE.Bone();pelvis.name='Pelvis';pelvis.position.set(0,.70,0);rigRoot.add(pelvis);
+     const spine=new THREE.Bone();spine.name='Spine';spine.position.set(0,.36,0);pelvis.add(spine);
+     const chest=new THREE.Bone();chest.name='Chest';chest.position.set(0,.28,0);spine.add(chest);
+     const neck=new THREE.Bone();neck.name='Neck';neck.position.set(0,.22,0);chest.add(neck);
+     const headBone=new THREE.Bone();headBone.name='Head';headBone.position.set(0,.15,0);neck.add(headBone);
+     const armBones={},legBones={};
+     for(const side of [-1,1]){
+       const upperArm=new THREE.Bone();upperArm.name=side<0?'UpperArm_L':'UpperArm_R';upperArm.position.set(side*.36,.05,0);chest.add(upperArm);
+       const forearm=new THREE.Bone();forearm.name=side<0?'Forearm_L':'Forearm_R';forearm.position.set(side*.02,-.30,0);upperArm.add(forearm);
+       const hand=new THREE.Bone();hand.name=side<0?'Hand_L':'Hand_R';hand.position.set(0,-.22,0);forearm.add(hand);
+       armBones[side]={upperArm,forearm,hand};
+       const thigh=new THREE.Bone();thigh.name=side<0?'Thigh_L':'Thigh_R';thigh.position.set(side*.16,-.02,0);pelvis.add(thigh);
+       const shin=new THREE.Bone();shin.name=side<0?'Shin_L':'Shin_R';shin.position.set(0,-.36,0);thigh.add(shin);
+       const foot=new THREE.Bone();foot.name=side<0?'Foot_L':'Foot_R';foot.position.set(0,-.30,.05);shin.add(foot);
+       legBones[side]={thigh,shin,foot};
      }
-   }catch(e){
-     if(importedCharacter){player.remove(importedCharacter);importedCharacter=null;}
-     fallbackCharacterMeshes.forEach(o=>o.visible=true);
-     toast('Neues Modell konnte nicht eingerichtet werden · bisherige Figur bleibt aktiv');
-   }
+     const bindPart=(obj,bone)=>{
+       if(!obj||!bone)return;
+       obj.updateWorldMatrix(true,false);bone.updateWorldMatrix(true,false);
+       bone.attach(obj);
+     };
+     importedCharacter.updateWorldMatrix(true,true);
+     importedCharacter.traverse(obj=>{
+       if(!obj.isMesh)return;
+       const n=obj.name||'';
+       if(/^(Head|Helmet|Horn_|EyeGlow_|SwordRune_|SwordTip|SwordBlade|SwordGuard|SwordGrip|BackSpine_)/.test(n)) bindPart(obj,headBone);
+       else if(/^(Shoulder_|ShoulderSpike_|ChestRim_|ChestPlate|HighCollar|AetherCore|Torso)$/.test(n)) bindPart(obj,chest);
+       else if(/^(ArmUpper_|ShoulderSpike_|ForearmSpike_|Gauntlet_)/.test(n)){
+         const side=n.endsWith('_-1')?-1:1;bindPart(obj,armBones[side].upperArm);
+       }
+       else if(/^(Thigh_|Greave_|Boot_|BootGoldTrim_)/.test(n)){
+         const side=n.endsWith('_-1')?-1:1;bindPart(obj,legBones[side].thigh);
+       }
+       else if(/^Cape/.test(n)) bindPart(obj,spine);
+     });
+     importedCharacter.userData.rig={rigRoot,pelvis,spine,chest,neck,headBone,armBones,legBones,phase:0};
+     characterMixer=new THREE.AnimationMixer(importedCharacter);
+     if(gltf.animations.length) characterMixer.clipAction(gltf.animations[0]).play();
+     toast('Dämonenlord-Prototyp geladen · modularer Aufbau');
+   }catch(e){fallbackCharacterMeshes.forEach(o=>o.visible=true);toast('Modell-Rig konnte nicht aktiviert werden');}
  },undefined,()=>{ /* Fallback remains visible if asset path is unavailable. */ });
 
 
