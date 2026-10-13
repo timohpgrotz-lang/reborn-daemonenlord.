@@ -1,0 +1,10 @@
+{
+  "name": "Reborn: Dämonenlord",
+  "short_name": "Reborn",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b1018",
+  "theme_color": "#10131d",
+  "orientation": "landscape",
+  "description": "Dark-Fantasy-Action-RPG mit Sekten und Königreichsausbau"
+}
