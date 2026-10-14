@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="de">
 <head>
-<!-- Version 4.0: custom demon lord GLB, enhanced settlement architecture, smoother NPC primitives, adaptive rendering. -->
+<!-- Version 4.1: Aetherion storm-armor character model, cyan energy crystals, corrected silhouette and back-cape geometry. -->
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>Reborn: Dämonenlord – Version 4.0 – 3D-Welt-Upgrade</title>
+<title>Reborn: Dämonenlord – Version 4.1 – Aetherion 3D-Modell</title>
 <style>
 :root{--gold:#e9c477;--panel:#10131de8;--line:#716084;--text:#f7f1ff;--muted:#c2b9d0;--purple:#9d63e8;--blue:#66c7ff;--red:#e75b70}
 *{box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}input,textarea{user-select:text;-webkit-user-select:text}button,.btn,[role="button"]{ -webkit-user-select:none;user-select:none;-webkit-touch-callout:none}html,body{margin:0;width:100%;height:100%;height:100dvh;overflow:hidden;background:#0b1018;color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif;touch-action:none}#game{position:fixed;inset:0}canvas{width:100%;height:100%;display:block}
@@ -152,7 +152,7 @@
   <p class="creator-sub">Gestalte deinen Helden und verteile deine ersten Attributpunkte. Deine Entscheidungen beeinflussen Überleben, Magie und Kampfstil.</p>
   <div class="creator-grid">
    <section class="creator-section"><b style="color:#e9c477">IDENTITÄT & AUSSEHEN</b>
-    <label for="heroName">Name</label><input id="heroName" maxlength="20" value="Asterion">
+    <label for="heroName">Name</label><input id="heroName" maxlength="20" value="Aetherion">
     <label for="hairColor">Haarfarbe</label><select id="hairColor"><option value="#171526">Mitternachtsschwarz</option><option value="#eee6ff">Silberweiß</option><option value="#6c244f">Dämonenrot</option><option value="#3b2a80">Arkanes Violett</option></select>
     <label for="eyeColor">Augenfarbe</label><select id="eyeColor"><option value="#ff315d">Dämonenrot</option><option value="#55e8ff">Kristallblau</option><option value="#d5ff62">Drachengrün</option><option value="#ffc45e">Gold</option></select>
     <label for="armorColor">Rüstungsfarbe</label><select id="armorColor"><option value="#211e34">Obsidianschwarz</option><option value="#16384b">Nachtblau</option><option value="#4a1837">Purpur</option><option value="#d2c9e8">Mondsilber</option></select>
@@ -884,7 +884,7 @@ const attrDefs=[
  ['intelligence','Intelligenz','Erhöht Mana und Zauberschaden'],
  ['endurance','Ausdauer','Erhöht Widerstandskraft und Verteidigung']
 ];
-const attributes={strength:5,agility:5,vitality:5,intelligence:5,endurance:5};let pointsRemaining=12,heroName='Asterion',modelBlobUrl=null;
+const attributes={strength:5,agility:5,vitality:5,intelligence:5,endurance:5};let pointsRemaining=12,heroName='Aetherion',modelBlobUrl=null;
 function renderAttributes(){
  const hosts=[document.querySelector('#attributeList'),document.querySelector('#attributeListGame')].filter(Boolean);
  const hp=100+(attributes.vitality-5)*12+(attributes.endurance-5)*8;
